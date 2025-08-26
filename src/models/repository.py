@@ -1,0 +1,29 @@
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from src.models import Note
+from src.models.schemas import CreateNote, AddNote
+
+
+class TaskRepository:
+
+    @classmethod
+    async def create_note(cls, note: CreateNote, session: AsyncSession):
+        task_dict = note.model_dump()
+        task = Note(**task_dict)
+        session.add(task)
+        await session.commit()
+
+    @classmethod
+    async def get_note_for_title(cls, title: str, session: AsyncSession):
+        stmt = select(Note).where(Note.title == title)
+        result = await session.execute(stmt)
+        note = result.scalars().first()
+        return note
+
+    @classmethod
+    async def get_all_note(cls, session: AsyncSession):
+        stmt = select(Note)
+        result = await session.execute(stmt)
+        all_note = result.scalars().all()
+        return all_note
