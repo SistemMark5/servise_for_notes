@@ -8,9 +8,8 @@ from src.models.schemas import CreateNote, AddNote
 class TaskRepository:
 
     @classmethod
-    async def create_note(cls, note: CreateNote, session: AsyncSession):
-        task_dict = note.model_dump()
-        task = Note(**task_dict)
+    async def create_note(cls, note: Note, session: AsyncSession):
+        task = note
         session.add(task)
         await session.commit()
 
@@ -27,3 +26,14 @@ class TaskRepository:
         result = await session.execute(stmt)
         all_note = result.scalars().all()
         return all_note
+
+    @classmethod
+    async def get_note_for_id(cls, session: AsyncSession, id: int):
+        stmt = select(Note).where(Note.id == id)
+        result = await session.execute(stmt)
+        return result.scalars().first()
+
+    @classmethod
+    async def delete_note(cls, session: AsyncSession, note: AddNote):
+        await session.delete(note)
+        await session.commit()
