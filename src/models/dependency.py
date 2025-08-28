@@ -20,3 +20,15 @@ async def get_by_title(
         status_code=status.HTTP_404_NOT_FOUND,
         detail="User not found",
     )
+
+async def get_by_id(
+        note_id: Annotated[int, Path],
+        session: AsyncSession = Depends(db_helper.session_dependency)
+):
+    note = await TaskRepository.get_note_for_id(id=note_id, session=session)
+    if note is not None:
+        return note
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Note is not found",
+    )
