@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Заметка • {{ note.title }} {%endblock%}
+{% block body %}
+<body class="body-for-note">
+    <article class="article-for-note">
+        <div class="title-for-notion-in-note">
+            <div>
+                <h1 class="title-note-in-notion">
+                    {{ note.title }}
+                </h1>
+                <h3 class="subtitle-note">
+                    Дата создания: {{ note.date_post.strftime('%H:%M') }}
+                </h3>
+            </div>
+            <div class="btn-in-note">
+                <button class="logout-for-main"><a href="/notes" class="back-to-main">Выйти на главную</a></button><br><br>
+            </div>
+        </div>
+        <div class="line-for-note-in-notion"></div>
+        <p class="text-in-notion">
+            {{ note.text }}
+        </p>
+    </article>
+</body>
+{% endblock %}

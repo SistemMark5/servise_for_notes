@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Главная{% endblock %}
+
+{% block body %}
+<center>
+    <body>
+            <header>
+                <div class="container">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="btn">Создать новую заметку</label>
+                    <div class="popup">
+                        <div class="window">
+                            <div class="title">
+                                <h1>Создать новую заметку</h1>
+                            </div>
+                            <div class="body">
+                                <form method="POST" action="{{ url_for('create_note') }}">
+                                    <input class="in-title" type="text" name="title" placeholder="Введите заголовок" required><br><br>
+                                    <textarea class="text-note" name="text" rows="4" required placeholder="Введите текст"></textarea><br><br>
+                                    <button class="btn-for-save" type="submit" for="click">Сохранить</button>
+                                </form>
+                            </div>
+                            <div class="bottom">
+                                <label for="click" class="btn-for-close">Закрыть</label>
+                            </div>
+                        </div>
+                        <div class="blackout"></div>
+                    </div>
+                </div>
+            </header>
+            {% for note in notes %}
+                <a href="/notes/{{ note.id }}/" class="link-in-box">
+                    <div class="conteiner-for-note">
+                        <div class="headline">
+                            <h1 class="headline-for-note">
+                                {{ note.title }}
+                            </h1>
+                            <h6 class="headline-for-date">
+                                Дата создания: {{ note.date_post.strftime('%H:%M') }}
+                            </h6>
+                        </div>
+                        <div class="line-for-note"></div>
+                        <div class="text-in-main">
+                            <p class="text-in-note" style="--lines: 2">
+                                {{ note.text }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        <script src="{{ url_for('static', path='js/script.js') }}"></script>
+    </body>
+</center>
+{% endblock %}
