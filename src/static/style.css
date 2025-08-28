@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,800;1,14..32,800&display=swap');
+body {
+    background-color: #F4F1E9;
+}
+.conteiner-for-note {
+    width: 1423px;
+    height: 345px;
+    background-color: #B1D182;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    
+}
+.btn-create-new-note{
+    padding: 10px 100px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 0px;
+    background-color: #151515;
+}
+.link-in-btn {
+    color: #CBCFD8;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+}
+.headline-for-note {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 40px;
+    margin-left: 90px;
+    color: #2B463C;
+}
+.headline-for-date {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+    margin-top: -20px;
+    margin-left: 50px;
+    margin-left: 140px;
+    color: #2B463C;
+}
+.line-for-note {
+    height: 293px;
+    width: 7px;
+    background-color: #2B463C;
+    margin-left: 20px;
+    border-radius: 7px;
+    margin-top: 27px;
+}
+.headline {
+    
+    margin-left: 230px;
+}
+.text-in-note {
+    margin-left: 20px;
+    margin-top: 30px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+    color: #688F4E;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--lines, 2); /* По умолчанию 2 строки */
+    -webkit-box-orient: vertical;
+}
+.btn-read-more {
+    padding: 10px 80px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 0px;
+    background-color: #151515;
+}
+.link-in-btn-read-more {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+    color: #CBCFD8;
+    text-decoration: none;
+}
+.cont1 {
+    height: 100px;
+}
+.link-in-box {
+    text-decoration: none;
+    color: #151515;
+}
+.container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#click {
+    display: none;
+}
+
+#click:checked ~ .popup {
+    display: flex;
+}
+.btn {
+    display: inline-block;
+    background-color: #2B463C;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+    color: #F4F1E9;
+    padding: 10px 50px;
+    border-radius: 8px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.btn:hover {
+    color: #B1D182;
+}
+.popup {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+.window {
+    position: absolute;
+    max-width: 600px;
+    width: 100%;
+    background-color: #F4F1E9;
+    border-radius: 20px;
+    z-index: 100;
+    max-height: 700px;
+    height: 100%;
+}
+.btn-for-close {
+    background-color: #688F4E;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+    color: #F4F1E9;
+    padding: 9.7px 205px;
+    border-radius: 8px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.btn-for-close:hover {
+    color: #B1D182;
+}
+.title {
+    color: #2B463C;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    margin-bottom: 50px;
+}
+.title-note{
+    color: #151515;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 20px;
+    padding: 10px;
+}
+.in-title {
+    border: 0px;
+    padding: 15px 15px;
+    width: 470px;
+    margin-left: 15px;
+    border-radius: 8px;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 20px;
+    margin-top: -20px;
+    color: #2B463C;
+    background-color: #B1D182;
+}
+.in-title::placeholder {
+    color:#688F4E;
+}
+.text-note {
+    width: 480px;
+    margin-left: 10px;
+    border-radius: 8px;
+    outline: none;
+    border: 0px;
+    color: #2B463C;
+    background-color: #B1D182;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 20px;
+    padding: 10px;
+    max-width: 480px;
+    max-height: 350px;
+    min-height: 350px;
+}
+.text-note::placeholder {
+    color: #688F4E;
+}
+.btn-for-save {
+    background-color: #2B463C;
+    color: #F4F1E9;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    width: 500px;
+    margin-left: 5px;
+    border: 0px;
+    transition: all 0.5s;
+}
+.btn-for-save:hover {
+    color: #B1D182;
+}
+.blackout {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #2B463C;
+    opacity: 0.8;
+}
+.body-for-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F4F1E9;
+}
+.article-for-note {
+    max-width: 1701px;
+    height: auto;
+    box-sizing: border-box;
+}
+.title-note-in-notion {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 88px;
+    color: #2B463C;
+}
+.subtitle-note {
+    color: #2B463C;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 32px;
+    margin-top: -75px;
+}
+.back-to-main {
+    color: #F4F1E9;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 24px;
+}
+.logout-for-main {
+    background-color: #688F4E;
+    border: 0px;
+    border-radius: 8px;
+    width: 481px;
+    height: 52px;
+}
+.delete-note {
+    background-color: #2B463C;
+    border: 0px;
+    border-radius: 8px;
+    width: 481px;
+    height: 52px;
+}
+.title-for-notion-in-note {
+    display: flex;
+}
+.btn-in-note {
+    margin-top: 110px;
+    margin-left: 765px;
+}
+.line-for-note-in-notion {
+    width: 1701px;
+    height: 7px;
+    border-radius: 8px;
+    background-color: #2B463C;
+}
+.text-in-notion {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 30px;
+    color: #2B463C;
+    text-align: justify;
+    text-justify: inter-word;
+}
+.text-in-main {
+    max-width: 830px;
+    max-height: 290px;
+    box-sizing: border-box;
+    text-align: justify;
+    text-justify: inter-word;
+    display: flex;
+    align-items: flex-start;
+}
