@@ -1,12 +1,9 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class CreateNote(BaseModel):
-    title: str = Field(title="Заголовок заметки")
-    text: str = Field(title="Текст заметки")
-
-    class Config:
-        from_attributes = True
+    title: str
+    text: str
 
 
 class ReadNote(CreateNote):
@@ -16,5 +13,6 @@ class ReadNote(CreateNote):
 class AddNote(CreateNote):
     id: int
 
-    class Config:
-        from_attributes = True
+    # model_config = ConfigDict(
+    #     from_attributes=True,
+    # )

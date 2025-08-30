@@ -8,10 +8,12 @@ from src.models.schemas import CreateNote, AddNote
 class TaskRepository:
 
     @classmethod
-    async def create_note(cls, note: Note, session: AsyncSession):
-        task = note
-        session.add(task)
+    async def create_note(cls, note: CreateNote, session: AsyncSession):
+        task = note.model_dump()
+        stmt = Note(**task)
+        session.add(stmt)
         await session.commit()
+        return task
 
     @classmethod
     async def get_note_for_title(cls, title: str, session: AsyncSession):
