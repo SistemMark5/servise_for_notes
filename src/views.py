@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Request, Form
 from sqlalchemy.ext.asyncio import AsyncSession
 from urllib3 import HTTPResponse
 
-from models import Note
+from src.models import Note
 from src.models import db_helper
 from src.models.repository import TaskRepository
 from src.models.dependency import get_by_title, get_by_id
@@ -18,12 +18,11 @@ router = APIRouter(
 
 @router.post("/create-note")
 async def create_note(
-    request: Request,
     title: str = Form(...),
     text: str = Form(...),
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    note = Note(title=title, text=text)
+    note = CreateNote(title=title, text=text)
     await TaskRepository.create_note(note=note, session=session)
     return RedirectResponse(url="/notes", status_code=303)
 
