@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request
 from starlette.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from config import settings
+from src.config import settings
 from src.utils.template import template
 from src.views import router as notes_routers
 
