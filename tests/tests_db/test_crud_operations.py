@@ -2,8 +2,8 @@ import pytest
 from requests import session
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from models.repository import TaskRepository
-from models.schemas import CreateNote
+from notes.repository import TaskRepository
+from notes.schemas import CreateNote
 
 @pytest.mark.asyncio
 async def test_create_note(session: AsyncSession):

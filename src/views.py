@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends, Request, Form
 from sqlalchemy.ext.asyncio import AsyncSession
 from urllib3 import HTTPResponse
 
-from src.models import Note
-from src.models import db_helper
-from src.models.repository import TaskRepository
-from src.models.dependency import get_by_title, get_by_id
-from src.models.schemas import CreateNote, AddNote
+from src.notes import Note
+from src.notes import db_helper
+from src.notes.repository import TaskRepository
+from src.notes.dependency import get_by_title, get_by_id
+from src.notes.schemas import CreateNote, AddNote
 from src.utils.template import template
 from fastapi.responses import RedirectResponse
 
@@ -63,3 +63,8 @@ async def delete_note(
 ):
     await TaskRepository.delete_note(note=note, session=session)
     return template.TemplateResponse(request=request, name="index.html")
+
+@router.delete("/delete-all")
+async def delete_all_notes(session: AsyncSession = Depends(db_helper.session_dependency)):
+    await TaskRepository.delete_all(session=session)
+    return {"ok": True}
