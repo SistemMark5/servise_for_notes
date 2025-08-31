@@ -4,9 +4,8 @@ from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from main import app
-from models import Note
-from src.models import db_helper
-from models.schemas import CreateNote, AddNote
+from notes import Note
+from src.notes import db_helper
 
 
 @pytest_asyncio.fixture()

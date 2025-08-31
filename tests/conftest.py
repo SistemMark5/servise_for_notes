@@ -1,5 +1,5 @@
 from src.config import settings
-from src.models import Base
+from src.notes import Base
 
 import pytest_asyncio
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
@@ -21,7 +21,7 @@ async def engine():
 # Фикстура для инициализации БД (без зависимости от event_loop)
 @pytest_asyncio.fixture(scope="session", autouse=True)
 async def setup_db(engine):
-    assert settings.db.MODE == "TEST"
+    assert settings.db.mode == "TEST"
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     yield
