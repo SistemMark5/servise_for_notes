@@ -4,8 +4,8 @@ from typing import Annotated
 from fastapi.params import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.models import db_helper
-from src.models.repository import TaskRepository
+from src.notes import db_helper
+from src.notes.repository import TaskRepository
 
 
 async def get_by_title(

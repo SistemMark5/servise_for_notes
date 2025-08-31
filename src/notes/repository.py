@@ -1,8 +1,8 @@
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.models import Note
-from src.models.schemas import CreateNote, AddNote
+from src.notes import Note
+from src.notes.schemas import CreateNote, AddNote
 
 
 class TaskRepository:
@@ -39,3 +39,10 @@ class TaskRepository:
     async def delete_note(cls, session: AsyncSession, note: AddNote):
         await session.delete(note)
         await session.commit()
+
+    @classmethod
+    async def delete_all(cls, session: AsyncSession):
+        stmt = delete(Note)
+        await session.execute(stmt)
+        await session.commit()
+
