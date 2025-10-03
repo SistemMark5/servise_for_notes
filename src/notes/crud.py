@@ -53,7 +53,7 @@ class NoteRepository:
         note_update: UpdateNote,
         note_in: AddNote,
     ):
-        task = note_in.model_dump()
-        for key, value in task.items():
-            setattr(note_update, key, value)
+        for key, value in note_update.model_dump().items():
+            setattr(note_in, key, value)
         await session.commit()
+        return note_update
