@@ -5,14 +5,14 @@ from fastapi.params import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.notes import db_helper
-from src.notes.repository import TaskRepository
+from src.notes.crud import NoteRepository
 
 
 async def get_by_title(
     title: Annotated[str, Path],
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    response = await TaskRepository.get_note_for_title(title=title, session=session)
+    response = await NoteRepository.get_note_for_title(title=title, session=session)
     if response is not None:
         return response
 
@@ -21,11 +21,12 @@ async def get_by_title(
         detail="User not found",
     )
 
+
 async def get_by_id(
-        note_id: Annotated[int, Path],
-        session: AsyncSession = Depends(db_helper.session_dependency)
+    note_id: Annotated[int, Path],
+    session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    note = await TaskRepository.get_note_for_id(id=note_id, session=session)
+    note = await NoteRepository.get_note_for_id(id=note_id, session=session)
     if note is not None:
         return note
     raise HTTPException(
