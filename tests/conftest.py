@@ -10,7 +10,7 @@ from sqlalchemy.pool import NullPool
 @pytest_asyncio.fixture(scope="session")
 async def engine():
     engine = create_async_engine(
-        url=settings.db.DATABASE_URL_asyncpg,
+        url=settings.db.url,
         poolclass=NullPool,
         echo=False,
     )
