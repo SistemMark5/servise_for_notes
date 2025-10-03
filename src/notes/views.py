@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends, Request, Form
 from sqlalchemy.ext.asyncio import AsyncSession
-from urllib3 import HTTPResponse
 
-from src.notes import Note
+from notes.schemas import UpdateNote
 from src.notes import db_helper
-from src.notes.repository import TaskRepository
+from src.notes.crud import NoteRepository
 from src.notes.dependency import get_by_title, get_by_id
 from src.notes.schemas import CreateNote, AddNote
 from src.utils.template import template
@@ -23,7 +22,7 @@ async def create_note(
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
     note = CreateNote(title=title, text=text)
-    await TaskRepository.create_note(note=note, session=session)
+    await NoteRepository.create_note(note=note, session=session)
     return RedirectResponse(url="/notes", status_code=303)
 
 
@@ -38,7 +37,7 @@ async def get_note_by_id(
     note_id: int,
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    note = await TaskRepository.get_note_for_id(session=session, id=note_id)
+    note = await NoteRepository.get_note_for_id(session=session, id=note_id)
     return template.TemplateResponse(
         request=request, name="note.html", context={"note": note}
     )
@@ -49,7 +48,7 @@ async def get_all_notes(
     request: Request,
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    notes = await TaskRepository.get_all_note(session=session)
+    notes = await NoteRepository.get_all_note(session=session)
     return template.TemplateResponse(
         request=request, name="index.html", context={"notes": notes}
     )
@@ -61,10 +60,25 @@ async def delete_note(
     note: AddNote = Depends(get_by_id),
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    await TaskRepository.delete_note(note=note, session=session)
+    await NoteRepository.delete_note(note=note, session=session)
     return template.TemplateResponse(request=request, name="index.html")
 
+
 @router.delete("/delete-all")
-async def delete_all_notes(session: AsyncSession = Depends(db_helper.session_dependency)):
-    await TaskRepository.delete_all(session=session)
+async def delete_all_notes(
+    session: AsyncSession = Depends(db_helper.session_dependency),
+):
+    await NoteRepository.delete_all(session=session)
+    return {"ok": True}
+
+
+@router.put("/update-note/{note_id}")
+async def update_note(
+    note_update: UpdateNote,
+    note_in: AddNote = Depends(get_by_id),
+    session: AsyncSession = Depends(db_helper.session_dependency),
+):
+    await NoteRepository.update_note(
+        note_in=note_in, note_update=note_update, session=session
+    )
     return {"ok": True}
