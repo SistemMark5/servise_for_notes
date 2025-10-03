@@ -2,10 +2,10 @@ from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.notes import Note
-from src.notes.schemas import CreateNote, AddNote
+from src.notes.schemas import CreateNote, AddNote, UpdateNote
 
 
-class TaskRepository:
+class NoteRepository:
 
     @classmethod
     async def create_note(cls, note: CreateNote, session: AsyncSession):
@@ -46,3 +46,14 @@ class TaskRepository:
         await session.execute(stmt)
         await session.commit()
 
+    @classmethod
+    async def update_note(
+        cls,
+        session: AsyncSession,
+        note_update: UpdateNote,
+        note_in: AddNote,
+    ):
+        task = note_in.model_dump()
+        for key, value in task.items():
+            setattr(note_update, key, value)
+        await session.commit()
