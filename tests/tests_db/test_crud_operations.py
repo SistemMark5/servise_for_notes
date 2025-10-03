@@ -3,7 +3,7 @@ from requests import session
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from notes.crud import NoteRepository
-from notes.schemas import CreateNote
+from notes.schemas import CreateNote, UpdateNote, AddNote
 
 
 @pytest.mark.asyncio
@@ -40,3 +40,18 @@ async def test_delete_note(session: AsyncSession):
         note = await NoteRepository.get_note_for_id(session=session, id=note_id)
         response = await NoteRepository.delete_note(session=session, note=note)
         assert response is None
+
+
+@pytest.mark.asyncio
+async def test_update_note_operation(session: AsyncSession):
+    note_in = AddNote(
+        id = 1,
+        title="Hello!",
+        text="Hello!",
+    )
+    note_update = UpdateNote(
+        title="Hello World!",
+        text="Hello World!",
+    )
+    response = await NoteRepository.update_note(session=session, note_in=note_in, note_update=note_update)
+    assert response == note_update
