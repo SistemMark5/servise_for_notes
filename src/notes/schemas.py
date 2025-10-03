@@ -9,6 +9,8 @@ class CreateNote(BaseModel):
 class ReadNote(CreateNote):
     pass
 
+class UpdateNote(CreateNote):
+    pass
 
 class AddNote(CreateNote):
     id: int
